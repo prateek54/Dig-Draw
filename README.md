@@ -3,7 +3,7 @@
 This project demonstrates how to use [TensorFlow Mobile](https://www.tensorflow.org/mobile/mobile_intro) on Android for handwritten digits classification from MNIST.
 
 <div align="center">
-  <img src="image/demo.gif" heigit="500"/>
+  <img src="app/screen.gif" heigit="500"/>
 </div>
 
 ### *IN MY CASE SINCE I DONT WANT TO DO THE TRAINING PART SO I SKIPPED STEP 1 & 2
@@ -22,8 +22,9 @@ This project demonstrates how to use [TensorFlow Mobile](https://www.tensorflow.
 ### Step 3. Build Android app
 
 Copy the `mnist_optimized.pb` generated in Step 2 to `/android/app/src/main/assets`, then build and run the app.
+you can find it assets folder because it is already copied there
 
-The [Classifer](https://github.com/nex3z/tfmobile-mnist-android/blob/master/android/app/src/main/java/com/nex3z/tfmobilemnist/Classifier.java) creates a [TensorFlowInferenceInterface](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/android/java/org/tensorflow/contrib/android/TensorFlowInferenceInterface.java) from  `mnist_optimized.pb`. The TensorFlowInferenceInterface provides an interface for inference and performance summarization, which is included in the following library.
+The [Classifer](https://github.com/prateek54/Dig-Draw/blob/master/app/src/main/java/dev/prateek/com/dig_draw/Classifier.java) creates a [TensorFlowInferenceInterface](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/android/java/org/tensorflow/contrib/android/TensorFlowInferenceInterface.java) from  `mnist_optimized.pb`. The TensorFlowInferenceInterface provides an interface for inference and performance summarization, which is included in the following library.
 
 ```
 implementation "org.tensorflow:tensorflow-android:1.8.0"
@@ -48,12 +49,11 @@ private static final String OUTPUT_NAME = "output";
 We feed in the pixel data, run the classifier, then fetch the outputs.
 Those outputs are then sorted to get the one with the highest confidence (above a specified threshold), and shown to the user
 
-     ```
-     - Copy the input data into TensorFlow.
+   - Copy the input data into TensorFlow.
      
     inferenceInterface.feed(inputName, pixels, new long[]{inputSize * inputSize});
   
-    - Run the inference call.
+   - Run the inference call.
     
     inferenceInterface.run(outputNames);
     
@@ -61,15 +61,12 @@ Those outputs are then sorted to get the one with the highest confidence (above 
      
     inferenceInterface.fetch(outputName, outputs);
     
-    - Find the best classifications.
+   - Find the best classifications.
     
     for (int i = 0; i < outputs.length; ++i) {
         <snip> 
     }
-    ```
-
-
-   
+    
 
 
 ### Credits
